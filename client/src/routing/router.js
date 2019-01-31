@@ -11,6 +11,7 @@ class Routing extends Component {
     return (
       <Switch>
         <Route path="/" component={Home} exact />
+        <Route path="/user/:token" component={Home} />
         <Route path="/cities" component={Cities} exact />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />

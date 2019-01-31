@@ -11,6 +11,18 @@
   height: 100vh;
 }
 
+.header {
+  padding: 10px 30px 10px 30px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid rgb(105, 105, 105);
+  box-shadow: 0 1px 5px -3px rgb(0, 0, 0);
+  margin-bottom: 5px;
+  background-color: #3b4e56;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
 /* menu MODAL */
 .outerWrapper {
   background-color: rgba(50, 50, 50, 0.85);
@@ -19,6 +31,7 @@
   position: fixed;
   top: 60px;
   left: calc(100vw - 270px);
+  z-index: 10;
 
   border-radius: 20px;
   display: flex;
@@ -68,7 +81,7 @@
   width: 100%;
   position: fixed;
   bottom: 0;
-  background-color: rgb(85, 81, 81);
+  background-color: rgb(59, 78, 86);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
@@ -84,6 +97,10 @@
 
 .hidden-icon i {
   color: transparent;
+}
+
+i {
+  color: white;
 }
 
 .city {
@@ -209,6 +226,14 @@
   overflow: hidden;
 }
 
+.profile-user-image-container {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  border: 1px solid white;
+  overflow: hidden;
+}
+
 .profile-picture {
   width: 100%;
 }
@@ -239,4 +264,8 @@
   background-color: #f44336; /* Red */
   color: white;
   margin-bottom: 15px;
+}
+
+.google-login-btn {
+  width: 225px;
 }

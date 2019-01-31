@@ -15,8 +15,8 @@ export class SlickSlider extends Component {
   render() {
     var settings = {
       dots: true,
-      slidesToShow: 3,
-      slidesToScroll: 2,
+      slidesToShow: 2,
+      slidesToScroll: 1,
       arrows: true,
       adaptiveHeight: false
     };

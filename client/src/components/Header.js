@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-
-const divStyle = {
-  padding: "15px 30px 10px 30px",
-  display: "flex",
-  justifyContent: "space-between"
-};
+import { connect } from "react-redux";
+import { logout } from "../store/actions/userActions";
 
 const iStyle = {
-  fontSize: "48px"
+  fontSize: "30px"
 };
 
 class Header extends Component {
@@ -17,6 +13,7 @@ class Header extends Component {
     this.state = {
       isOpen: false
     };
+    this.logout = this.logout.bind(this);
   }
 
   toggleModal = () => {
@@ -30,15 +27,48 @@ class Header extends Component {
     });
   };
 
+  logout() {
+    if (window.confirm("Do you want to logOut?")) {
+      localStorage.removeItem("token");
+      this.props.logout();
+      window.location = "/";
+    }
+  }
+
   render() {
     return (
-      <div style={divStyle}>
-        <i style={iStyle} className="material-icons">
-          account_circle
-        </i>
-        <i style={iStyle} className="material-icons" onClick={this.toggleModal}>
-          menu
-        </i>
+      <div className="header">
+        {this.props.user.isLoggedIn ? (
+          <>
+            <div className="profile-user-image-container">
+              <img
+                src={
+                  this.props.user.image ||
+                  "https://thesocietypages.org/socimages/files/2009/05/vimeo.jpg"
+                }
+                alt={this.props.user.name}
+                className="profile-picture"
+              />
+            </div>
+          </>
+        ) : (
+          <i style={iStyle} className="material-icons">
+            account_circle
+          </i>
+        )}
+        {!this.props.user.isLoggedIn ? (
+          <i
+            style={iStyle}
+            className="material-icons"
+            onClick={this.toggleModal}
+          >
+            menu
+          </i>
+        ) : (
+          <i style={iStyle} className="material-icons" onClick={this.logout}>
+            launch
+          </i>
+        )}
 
         <Menu show={this.state.isOpen}>
           {/* <Menu show={this.state.isOpen} onClose={this.toggleModal}> */}
@@ -71,4 +101,19 @@ class Menu extends Component {
   }
 }
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(logout())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);

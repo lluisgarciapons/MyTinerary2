@@ -81,6 +81,7 @@ export class Cities extends Component {
   }
 
   render() {
+    localStorage.setItem("url", this.props.match.url);
     return (
       <div>
         {!this.props.cities.isLoading ? this.content() : this.loader()}

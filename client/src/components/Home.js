@@ -2,7 +2,25 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
 export class Home extends Component {
+  componentDidMount() {
+    if (
+      this.props.match.params.token ||
+      localStorage.getItem("token") !== null
+    ) {
+      console.log("logged in");
+      //action login
+      if (this.props.match.params.token) {
+        localStorage.setItem("token", this.props.match.params.token);
+        window.history.replaceState(null, null, `${window.location.origin}`);
+      }
+    } else {
+      console.log("not logged in");
+      //action logout
+    }
+  }
+
   render() {
+    localStorage.setItem("url", this.props.match.url);
     console.log("Welcome to MyTinerary!");
     return (
       <div id="page-wrap">

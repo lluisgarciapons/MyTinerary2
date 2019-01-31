@@ -78,6 +78,7 @@ export class Itineraries extends Component {
   }
 
   render() {
+    localStorage.setItem("url", this.props.match.url);
     console.log("Itineraries");
     return (
       <div>
