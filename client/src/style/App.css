@@ -269,3 +269,77 @@ i {
 .google-login-btn {
   width: 225px;
 }
+
+.comments-section {
+  margin-top: 50px;
+}
+
+/*that long to override materializa css*/
+input[type="text"]:not(.browser-default).comment-input {
+  background-color: rgb(245, 245, 245);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.comment {
+  display: flex;
+  margin: 5px 0;
+}
+
+.comment-image {
+  max-width: 40px;
+  max-height: 40px;
+}
+
+.comment-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 80%;
+  max-width: 80%;
+  margin-left: 20px;
+  background-color: rgb(216, 255, 209);
+  border-radius: 10px;
+  border-top-left-radius: 0;
+  padding: 5px;
+}
+
+.comment-box:before {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  margin: -5px 0 0 -15px;
+  border-bottom: 8px solid transparent;
+  border-right: 10px solid rgb(216, 255, 209);
+  /* border-left: 18px solid transparent; */
+  border-top: 8px solid transparent;
+}
+
+.comment-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.close {
+  color: crimson;
+}
+
+.comment-user {
+  font-weight: bold;
+}
+
+.comment-message {
+  width: 90%;
+  text-align: left;
+  padding-left: 5px;
+  word-break: break-word;
+}
+
+.comment-time {
+  align-self: flex-end;
+  font-weight: lighter;
+  font-size: 60%;
+  font-style: italic;
+}

@@ -8,6 +8,7 @@ const keys = require("./config/keys");
 const cityRouter = require("./api/cityRouter");
 const itineraryRouter = require("./api/itineraryRouter");
 const activityRouter = require("./api/activityRouter");
+const commentRouter = require("./api/commentRouter");
 const authRouter = require("./api/authRouter");
 const userRouter = require("./api/userRouter");
 require("./config/passport");
@@ -35,6 +36,11 @@ mongoose.connect(
 app.use("/cities", cityRouter);
 app.use("/itineraries", itineraryRouter);
 app.use("/activities", activityRouter);
+app.use(
+  "/comments",
+  passport.authenticate("jwt", { session: false }),
+  commentRouter
+);
 app.use("/auth", authRouter);
 app.use("/user", passport.authenticate("jwt", { session: false }), userRouter);
 

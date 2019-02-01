@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Comments from "./Comments";
 import SlickSlider from "./SlickSlider";
 
 function HastagList(props) {
@@ -45,6 +46,7 @@ export class Itinerary extends Component {
         <div className="collapsible-body">
           <h3>Find the best activities!</h3>
           <SlickSlider itinerary={itinerary} />
+          <Comments itinerary={this.props.itinerary} />
         </div>
       </li>
     );

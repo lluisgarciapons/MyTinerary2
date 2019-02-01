@@ -4,12 +4,14 @@ import Footer from "../Footer";
 import { connect } from "react-redux";
 import { fetchItineraries } from "../../store/actions/itinerariesActions";
 import { fetchActivities } from "../../store/actions/activitiesActions";
+import { fetchComments } from "../../store/actions/commentsActions";
 import M from "materialize-css";
 
 export class Itineraries extends Component {
-  componentDidMount() {
-    this.props.fetchItineraries(this.props.match.params.id);
-    this.props.fetchActivities(this.props.match.params.id);
+  async componentDidMount() {
+    await this.props.fetchItineraries(this.props.match.params.id);
+    await this.props.fetchActivities(this.props.match.params.id);
+    await this.props.fetchComments(this.props.match.params.id);
   }
 
   componentDidUpdate() {
@@ -62,7 +64,10 @@ export class Itineraries extends Component {
         <div className="itinerary-city">
           <h1>{this.getCity()}</h1>
           <ul className="collapsible">
-            <ItinerariesList itineraries={this.props.itineraries.payload} />
+            <ItinerariesList
+              itineraries={this.props.itineraries.payload}
+              comments={this.props.comments.payload}
+            />
           </ul>
         </div>
       );
@@ -91,7 +96,8 @@ export class Itineraries extends Component {
 
 const mapStateToProps = state => {
   return {
-    itineraries: state.itineraries
+    itineraries: state.itineraries,
+    comments: state.comments
   };
 };
 
@@ -99,6 +105,7 @@ export default connect(
   mapStateToProps,
   {
     fetchItineraries,
-    fetchActivities
+    fetchActivities,
+    fetchComments
   }
 )(Itineraries);
