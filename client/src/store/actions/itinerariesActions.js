@@ -24,7 +24,11 @@ export function fetchItineraries(cityId) {
     axios
       .get(`/itineraries/${cityId}`)
       .then(res => {
-        console.log(res);
+        console.log(
+          `Itineraries for this city: (${res.data.length}) ${res.data.map(
+            it => it.title
+          )}`
+        );
         dispatch(fetchItinerariesSuccess(res.data));
       })
       .catch(err => {

@@ -12,25 +12,10 @@ import {
 import M from "materialize-css";
 
 export class Itineraries extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      comments: []
-    };
-  }
   async componentDidMount() {
     await this.props.fetchItineraries(this.props.match.params.id);
     await this.props.fetchActivities(this.props.match.params.id);
     await this.props.fetchComments(this.props.match.params.id);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log("props received");
-    if (nextProps.comments !== this.props.comments) {
-      this.setState({
-        comments: nextProps.comments
-      });
-    }
   }
 
   componentDidUpdate() {
@@ -39,22 +24,6 @@ export class Itineraries extends Component {
   }
 
   loader() {
-    // <img src="image.svg" onerror="this.onerror=null; this.src='image.png'"></img>
-    // return (
-    //   <div className="preloader-wrapper big active">
-    //     <div className="spinner-layer spinner-blue-only">
-    //       <div className="circle-clipper left">
-    //         <div className="circle" />
-    //       </div>
-    //       <div className="gap-patch">
-    //         <div className="circle" />
-    //       </div>
-    //       <div className="circle-clipper right">
-    //         <div className="circle" />
-    //       </div>
-    //     </div>
-    //   </div>
-    // );
     return (
       <div>
         <div className="lds-css ng-scope">
@@ -100,7 +69,6 @@ export class Itineraries extends Component {
 
   render() {
     localStorage.setItem("url", this.props.match.url);
-    console.log("Itineraries");
     return (
       <div className="itineraries">
         {!this.props.itineraries.isLoading ? this.content() : this.loader()}

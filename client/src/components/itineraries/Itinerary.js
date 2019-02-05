@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Comments from "./Comments";
+import Heart from "./Heart";
 import SlickSlider from "./SlickSlider";
 
 function HastagList(props) {
@@ -26,8 +27,10 @@ export class Itinerary extends Component {
             </div>
             <h4>{itinerary.user.userName}</h4>
           </div>
-          <div className="col s8 offset-s1 info">
-            <h3 className="col s12">{itinerary.title}</h3>
+          <div className="col s9 info">
+            <h3 className="col s10">{itinerary.title}</h3>
+
+            <Heart itinerary={itinerary} />
 
             <div className="col s4">
               <h4>Likes: {itinerary.likes}</h4>
@@ -44,7 +47,8 @@ export class Itinerary extends Component {
           </div>
         </div>
         <div className="collapsible-header">
-          <div>SHOW MORE</div>
+          <i className="material-icons">expand_more</i>
+          <div className="show-more">SHOW MORE</div>
         </div>
         <div className="collapsible-body">
           <h3>Find the best activities!</h3>

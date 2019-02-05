@@ -24,7 +24,6 @@ export function fetchCities() {
     axios
       .get("/cities")
       .then(res => {
-        console.log(res);
         dispatch(fetchCitiesSuccess(res.data));
       })
       .catch(err => {

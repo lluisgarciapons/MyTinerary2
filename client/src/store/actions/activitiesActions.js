@@ -24,7 +24,6 @@ export function fetchActivities(cityId) {
     axios
       .get(`/activities/${cityId}`)
       .then(res => {
-        console.log(res);
         dispatch(fetchActivitiesSuccess(res.data));
       })
       .catch(err => {

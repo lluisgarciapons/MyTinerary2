@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import M from "materialize-css";
+import M from "materialize-css";
 import {
   postComment,
   deleteComment
 } from "../../store/actions/commentsActions";
+import { NavLink } from "react-router-dom";
 
 //finds the comments for each itinerary
 const findComments = (itinerary, comments) => {
@@ -45,13 +46,15 @@ export class Comments extends Component {
       this.setState({
         comments: comments
       });
+      //this querySelector inside the if prevents the toast to appear if there is another
+      //toast active. It gets twice inside this else if so that's why I don't want
+      //a second toast for the same comment
     } else if (
-      nextProps.comments.toast !== this.props.comments.toast &&
-      nextProps.comments.toast === true
+      nextProps.comments.toast === true &&
+      !document.querySelector(".toast")
     ) {
-      //I'll just comment that part because I can't figure it out why it triggers twice
-      // var toastHTML = `<span>Message sent</span>`;
-      // M.toast({ html: toastHTML, classes: "rounded" });
+      var toastHTML = `<span>Message sent</span>`;
+      M.toast({ html: toastHTML, classes: "rounded" });
     }
   }
 
@@ -176,7 +179,8 @@ export class Comments extends Component {
           </div>
         ) : (
           <h3 className="alert comments-section">
-            You must LOG IN to see the comments section.
+            You must <NavLink to="/login">LOG IN</NavLink> to see the comments
+            section.
           </h3>
         )}
       </>

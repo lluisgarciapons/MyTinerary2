@@ -24,12 +24,11 @@ class Login extends Component {
         password: this.state.password
       })
       .then(res => {
-        console.log(res);
         localStorage.setItem("token", res.data.token);
         window.location = localStorage.getItem("url");
       })
       .catch(err => {
-        console.log(err.response);
+        console.log(err.response.data);
         this.props.loginFail(err.response.data.message);
       });
   }

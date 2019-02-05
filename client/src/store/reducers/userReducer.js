@@ -34,6 +34,18 @@ export default function userReducer(state = initialState, action) {
       return {
         ...initialState
       };
+    case "ADD_FAVORITE":
+      return {
+        ...state,
+        favorites: [...state.favorites, action.itinerary]
+      };
+    case "REMOVE_FAVORITE":
+      return {
+        ...state,
+        favorites: state.favorites.filter(
+          itinerary => itinerary !== action.itinerary
+        )
+      };
 
     default:
       return state;

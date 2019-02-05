@@ -50,11 +50,11 @@ export function fetchComments(cityId) {
       })
       .then(res => {
         dispatch(fetchCommentsSuccess(res.data));
-        console.log("CommentsOk: ", res.data);
+        console.log(`comments section: Authorized.`);
       })
       .catch(err => {
+        console.log(`comments section: ${err.response.data}`);
         dispatch(fetchCommentsFailure(err.message));
-        console.log("CommentsNo: ", err);
       });
   };
 }
@@ -81,7 +81,6 @@ export function postComment(body) {
         }
       )
       .then(res => {
-        console.log(res);
         if (res.status === 201) {
           dispatch(changeToast(true));
           dispatch(postCommentSuccess(res.data));
@@ -108,7 +107,6 @@ export function deleteComment(id) {
         }
       })
       .then(res => {
-        console.log(res);
         if (res.status === 202) {
           dispatch(deleteCommentSuccess(id));
           console.log(res.data);

@@ -11,6 +11,8 @@ class App extends Component {
   async componentDidMount() {
     if (localStorage.getItem("token")) {
       await this.props.fetchUser();
+    } else {
+      console.log("Not logged in.");
     }
   }
 

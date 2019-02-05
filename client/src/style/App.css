@@ -228,6 +228,12 @@
 
 .collapsible-header {
   background-color: #f8f8f8 !important;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.collapsible-header > i {
+  margin: 0;
 }
 
 .itinerary-content {
@@ -235,6 +241,18 @@
   margin-top: 15px;
   margin-bottom: 0;
   border-top: 1px solid #ddd;
+}
+
+.favorite {
+  color: red;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.logout-favorite {
+  color: rgb(184, 184, 184);
+  margin-bottom: 10px;
+  cursor: not-allowed;
 }
 
 .profile-image-container {

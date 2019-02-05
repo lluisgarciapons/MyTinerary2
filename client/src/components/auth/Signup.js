@@ -26,13 +26,13 @@ export class Signup extends Component {
   onSubmit(e) {
     e.preventDefault();
     if (!this.state.username || !this.state.email || !this.state.password) {
-      console.log("not filled");
+      console.log("fields not filled");
       this.setState({
         isError: true,
         error: "All fields are required."
       });
     } else if (this.state.password !== this.state.passwordVal) {
-      console.log("not match");
+      console.log("password don't match");
       this.setState({
         isError: true,
         error: "Passwords must be the same."
@@ -61,7 +61,7 @@ export class Signup extends Component {
               window.location = localStorage.getItem("url");
             })
             .catch(err => {
-              console.log(err.response);
+              console.log(err.response.data);
               this.props.loginFail(err.response.data.message);
             });
         })
@@ -70,7 +70,7 @@ export class Signup extends Component {
             isError: true,
             error: err.response.data.message
           });
-          console.log(err.response);
+          console.log(err.response.data);
         });
     }
   }
