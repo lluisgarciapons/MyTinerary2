@@ -32,9 +32,10 @@ export function deleteCommentSuccess(id) {
   };
 }
 
-export function changeToast() {
+export function changeToast(payload) {
   return {
-    type: "CHANGE_TOAST"
+    type: "CHANGE_TOAST",
+    toast: payload
   };
 }
 
@@ -82,7 +83,7 @@ export function postComment(body) {
       .then(res => {
         console.log(res);
         if (res.status === 201) {
-          // dispatch(changeToast());
+          dispatch(changeToast(true));
           dispatch(postCommentSuccess(res.data));
           console.log(
             `New comment from ${res.data.user.name}: `,
@@ -108,9 +109,9 @@ export function deleteComment(id) {
       })
       .then(res => {
         console.log(res);
-        if (res.status === 204) {
+        if (res.status === 202) {
           dispatch(deleteCommentSuccess(id));
-          console.log("Comment deleted");
+          console.log(res.data);
         } else {
           alert("not loooooooooged in");
         }

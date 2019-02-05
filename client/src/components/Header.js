@@ -52,20 +52,24 @@ class Header extends Component {
             </div>
           </>
         ) : (
-          <i style={iStyle} className="material-icons">
+          <i style={iStyle} className="material-icons icon">
             account_circle
           </i>
         )}
         {!this.props.user.isLoggedIn ? (
           <i
             style={iStyle}
-            className="material-icons"
+            className="material-icons icon"
             onClick={this.toggleModal}
           >
             menu
           </i>
         ) : (
-          <i style={iStyle} className="material-icons" onClick={this.logout}>
+          <i
+            style={iStyle}
+            className="material-icons icon"
+            onClick={this.logout}
+          >
             launch
           </i>
         )}

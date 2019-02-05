@@ -32,8 +32,8 @@ export default function commentsReducer(state = initialState, action) {
     case "POST_COMMENT":
       return {
         ...state,
+        toast: false,
         payload: [action.comments, ...state.payload]
-        // toast: false
       };
     case "DEL_COMMENT":
       return {
@@ -43,7 +43,7 @@ export default function commentsReducer(state = initialState, action) {
     case "CHANGE_TOAST":
       return {
         ...state,
-        toast: true
+        toast: action.toast
       };
     default:
       return state;

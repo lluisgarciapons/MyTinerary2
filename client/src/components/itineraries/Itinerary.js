@@ -15,7 +15,7 @@ export class Itinerary extends Component {
     const itinerary = this.props.itinerary;
     return (
       <li className="itinerary">
-        <div className="collapsible-header row">
+        <div className="row itinerary-content">
           <div className="col s3 profile">
             <div className="profile-image-container">
               <img
@@ -43,10 +43,13 @@ export class Itinerary extends Component {
             <HastagList hastags={itinerary.hastags} />
           </div>
         </div>
+        <div className="collapsible-header">
+          <div>SHOW MORE</div>
+        </div>
         <div className="collapsible-body">
           <h3>Find the best activities!</h3>
           <SlickSlider itinerary={itinerary} />
-          <Comments itinerary={this.props.itinerary} />
+          <Comments itinerary={itinerary} />
         </div>
       </li>
     );

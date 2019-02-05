@@ -20,11 +20,10 @@ commentRouter
     });
   })
   .delete((req, res) => {
-    console.log("actually deleted from database");
     Comment.findById(req.params.id, (err, comment) => {
       if (
         comment.user.name ===
-        (req.user.auth.google
+        (req.user.auth.google.name
           ? req.user.auth.google.name
           : req.user.auth.local.name)
       ) {
@@ -32,7 +31,8 @@ commentRouter
           if (err) {
             res.status(500).send(err);
           } else {
-            res.status(204).send("removed");
+            //202 accepted
+            res.status(202).send("Comment deleted.");
           }
         });
       } else {

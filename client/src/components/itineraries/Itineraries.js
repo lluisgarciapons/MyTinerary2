@@ -4,14 +4,33 @@ import Footer from "../Footer";
 import { connect } from "react-redux";
 import { fetchItineraries } from "../../store/actions/itinerariesActions";
 import { fetchActivities } from "../../store/actions/activitiesActions";
-import { fetchComments } from "../../store/actions/commentsActions";
+import {
+  fetchComments,
+  postComment,
+  deleteComment
+} from "../../store/actions/commentsActions";
 import M from "materialize-css";
 
 export class Itineraries extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      comments: []
+    };
+  }
   async componentDidMount() {
     await this.props.fetchItineraries(this.props.match.params.id);
     await this.props.fetchActivities(this.props.match.params.id);
     await this.props.fetchComments(this.props.match.params.id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("props received");
+    if (nextProps.comments !== this.props.comments) {
+      this.setState({
+        comments: nextProps.comments
+      });
+    }
   }
 
   componentDidUpdate() {
@@ -64,10 +83,7 @@ export class Itineraries extends Component {
         <div className="itinerary-city">
           <h1>{this.getCity()}</h1>
           <ul className="collapsible">
-            <ItinerariesList
-              itineraries={this.props.itineraries.payload}
-              comments={this.props.comments.payload}
-            />
+            <ItinerariesList itineraries={this.props.itineraries.payload} />
           </ul>
         </div>
       );
@@ -86,7 +102,7 @@ export class Itineraries extends Component {
     localStorage.setItem("url", this.props.match.url);
     console.log("Itineraries");
     return (
-      <div>
+      <div className="itineraries">
         {!this.props.itineraries.isLoading ? this.content() : this.loader()}
         <Footer goBack={"cities"} />
       </div>
@@ -106,6 +122,8 @@ export default connect(
   {
     fetchItineraries,
     fetchActivities,
-    fetchComments
+    fetchComments,
+    postComment,
+    deleteComment
   }
 )(Itineraries);

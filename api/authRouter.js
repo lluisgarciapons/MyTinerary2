@@ -27,7 +27,7 @@ authRouter.post("/login", function(req, res, next) {
   })(req, res);
 });
 
-//port signup
+//post signup
 authRouter.post("/signup", (req, res, next) => {
   if (req.body.password === req.body.passwordVal) {
     if (req.body.username.length >= 4) {

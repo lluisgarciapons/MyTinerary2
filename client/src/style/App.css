@@ -99,8 +99,14 @@
   color: transparent;
 }
 
-i {
+.icon {
   color: white;
+  cursor: pointer;
+}
+
+.close {
+  color: maroon;
+  cursor: pointer;
 }
 
 .city {
@@ -212,9 +218,23 @@ i {
   margin-top: 100px;
 }
 
+.itineraries {
+  margin-bottom: 60px;
+}
+
+.collapsible {
+  border: 0;
+}
+
 .collapsible-header {
-  background-color: #f8f8f8 !important
-  ;
+  background-color: #f8f8f8 !important;
+}
+
+.itinerary-content {
+  padding-top: 10px;
+  margin-top: 15px;
+  margin-bottom: 0;
+  border-top: 1px solid #ddd;
 }
 
 .profile-image-container {

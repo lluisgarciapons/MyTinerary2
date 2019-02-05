@@ -94,7 +94,8 @@ passport.use(
                   {
                     "auth.google.id": profile.id,
                     "auth.google.email": profile.emails[0].value,
-                    "auth.google.name": profile.displayName
+                    "auth.google.name": profile.displayName,
+                    "auth.google.image": profile.photos[0].value
                   }
                 ).then(updatedUser => {
                   console.log("user updated: ", updatedUser);
@@ -106,7 +107,8 @@ passport.use(
                 new User({
                   "auth.google.id": profile.id,
                   "auth.google.name": profile.displayName,
-                  "auth.google.email": profile.emails[0].value
+                  "auth.google.email": profile.emails[0].value,
+                  "auth.google.image": profile.photos[0].value
                 })
                   .save()
                   .then(newUser => {

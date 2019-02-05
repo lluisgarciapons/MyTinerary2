@@ -1,9 +1,21 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+// import M from "materialize-css";
 import {
   postComment,
   deleteComment
 } from "../../store/actions/commentsActions";
-import { connect } from "react-redux";
+
+//finds the comments for each itinerary
+const findComments = (itinerary, comments) => {
+  return comments.filter(
+    //When I post a new comment, it doesn't populate the itinerary field,
+    //so comment.itinerary will be just the id of that itinerary,
+    //thats why comment.itinerary._id get the id of the already populated,
+    //and comment.itinerary gets it for the ones just posted.
+    comment => (comment.itinerary._id || comment.itinerary) === itinerary._id
+  );
+};
 
 export class Comments extends Component {
   constructor(props) {
@@ -12,14 +24,36 @@ export class Comments extends Component {
     this.onClickHandler = this.onClickHandler.bind(this);
     this.updateInputValue = this.updateInputValue.bind(this);
     this.state = {
-      inputValue: ""
+      inputValue: "",
+      comments: []
     };
   }
 
-  //finds the comments for each itinerary
-  findComments = (itinerary, comments) => {
-    return comments.filter(comment => comment.itinerary._id === itinerary._id);
-  };
+  //componentWillReceiveProps is deprecated
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.comments.payload !== this.props.comments.payload) {
+      //even though I send the comments already sorted from back, it doesn't work properly
+      let comments = Array.from(nextProps.comments.payload);
+      function compare(a, b) {
+        if (a.date < b.date) return 1;
+        if (a.date > b.date) return -1;
+        return 0;
+      }
+      comments.sort(compare);
+      //call the function that gets the comments for that specific Itinerary
+      comments = findComments(nextProps.itinerary, comments);
+      this.setState({
+        comments: comments
+      });
+    } else if (
+      nextProps.comments.toast !== this.props.comments.toast &&
+      nextProps.comments.toast === true
+    ) {
+      //I'll just comment that part because I can't figure it out why it triggers twice
+      // var toastHTML = `<span>Message sent</span>`;
+      // M.toast({ html: toastHTML, classes: "rounded" });
+    }
+  }
 
   onClickHandler() {
     if (this.state.inputValue !== "") {
@@ -34,14 +68,19 @@ export class Comments extends Component {
         date: Date.now(),
         city: itinerary.city._id
       };
+      //calls the action that posts a comment
       this.props.postComment(commentBody);
       this.setState({
         inputValue: ""
       });
-      //I have to do this because the component won't re-render itself when I post a comment
-      window.location.reload();
     }
   }
+
+  handleKeyUp = event => {
+    if (event.key === "Enter") {
+      this.onClickHandler();
+    }
+  };
 
   updateInputValue() {
     this.setState({
@@ -75,16 +114,13 @@ export class Comments extends Component {
       "are you sure you want to delete this comment?"
     );
     if (confirmDelete) {
+      //calls the action that deletes a comment
       this.props.deleteComment(e.target.id);
     }
   }
 
   render() {
-    // let comments = this.props.comments.payload;
-    const comments = this.findComments(
-      this.props.itinerary,
-      this.props.comments.payload
-    );
+    let comments = this.state.comments;
     const username = this.props.user.name;
     return (
       <>
@@ -99,6 +135,7 @@ export class Comments extends Component {
                 className="comment-input"
                 type="text"
                 placeholder="write here"
+                onKeyUp={this.handleKeyUp}
               />
             </div>
             <button onClick={this.onClickHandler} className="btn">
@@ -110,7 +147,10 @@ export class Comments extends Component {
                 <div className="col s12 comment" key={index}>
                   <img
                     className="comment-image"
-                    src={comment.user.photo}
+                    src={
+                      comment.user.photo ||
+                      "https://thesocietypages.org/socimages/files/2009/05/vimeo.jpg"
+                    }
                     alt="profile"
                   />
                   <div className="comment-box">
@@ -121,7 +161,7 @@ export class Comments extends Component {
                           className="close"
                           onClick={this.deletePost.bind(this)}
                         >
-                          <i id={comment._id} className="material-icons">
+                          <i id={comment._id} className="material-icons close">
                             close
                           </i>
                         </div>

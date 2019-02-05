@@ -8,14 +8,13 @@ export class Home extends Component {
       localStorage.getItem("token") !== null
     ) {
       console.log("logged in");
-      //action login
+
       if (this.props.match.params.token) {
         localStorage.setItem("token", this.props.match.params.token);
         window.history.replaceState(null, null, `${window.location.origin}`);
       }
     } else {
       console.log("not logged in");
-      //action logout
     }
   }
 
