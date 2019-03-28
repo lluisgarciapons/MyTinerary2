@@ -44,9 +44,12 @@ commentRouter
 commentRouter
   .route("/")
   .get((req, res) => {
-    Comment.find({}, (err, comments) => {
-      res.json(comments);
-    });
+    Comment.find({})
+      .populate("city", "name")
+      .populate("itinerary", "title")
+      .exec((err, comments) => {
+        res.json(comments);
+      });
   })
   .post((req, res) => {
     let comment = new Comment({

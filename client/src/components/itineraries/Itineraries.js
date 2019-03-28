@@ -4,11 +4,7 @@ import Footer from "../Footer";
 import { connect } from "react-redux";
 import { fetchItineraries } from "../../store/actions/itinerariesActions";
 import { fetchActivities } from "../../store/actions/activitiesActions";
-import {
-  fetchComments,
-  postComment,
-  deleteComment
-} from "../../store/actions/commentsActions";
+import { fetchComments } from "../../store/actions/commentsActions";
 import M from "materialize-css";
 
 export class Itineraries extends Component {
@@ -72,7 +68,7 @@ export class Itineraries extends Component {
     return (
       <div className="itineraries">
         {!this.props.itineraries.isLoading ? this.content() : this.loader()}
-        <Footer goBack={"cities"} />
+        <Footer goBack={"/cities"} />
       </div>
     );
   }
@@ -80,8 +76,7 @@ export class Itineraries extends Component {
 
 const mapStateToProps = state => {
   return {
-    itineraries: state.itineraries,
-    comments: state.comments
+    itineraries: state.itineraries
   };
 };
 
@@ -90,8 +85,6 @@ export default connect(
   {
     fetchItineraries,
     fetchActivities,
-    fetchComments,
-    postComment,
-    deleteComment
+    fetchComments
   }
 )(Itineraries);

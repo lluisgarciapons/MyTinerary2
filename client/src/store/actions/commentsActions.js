@@ -39,6 +39,26 @@ export function changeToast(payload) {
   };
 }
 
+export function fetchAllComments() {
+  return dispatch => {
+    dispatch(fetchingComments());
+    axios
+      .get(`/comments`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      })
+      .then(res => {
+        dispatch(fetchCommentsSuccess(res.data));
+        console.log(`comments section: Authorized.`);
+      })
+      .catch(err => {
+        console.log(`comments section: ${err.response.data}`);
+        dispatch(fetchCommentsFailure(err.message));
+      });
+  };
+}
+
 export function fetchComments(cityId) {
   return dispatch => {
     dispatch(fetchingComments());

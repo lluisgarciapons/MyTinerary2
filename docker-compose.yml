@@ -1,0 +1,16 @@
+version: "3"
+services:
+  backend:
+    build: .
+    image: docker/backend
+    ports:
+      - "5000:5000"
+  frontend:
+    build: ./client
+    image: docker/frontend
+    ports:
+      - "3000:3000"
+    links:
+      - backend
+    depends_on:
+      - backend

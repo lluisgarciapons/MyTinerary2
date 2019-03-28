@@ -76,11 +76,13 @@ export class Cities extends Component {
 
 const mapStateToProps = state => {
   return {
+    //now this.props.cities will be the cities state object
     cities: state.cities
   };
 };
 
 export default connect(
   mapStateToProps,
+  //this.props.fetchCities() will trigger the API call
   { fetchCities }
 )(Cities);

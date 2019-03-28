@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 export class Footer extends Component {
   render() {
     if (this.props.goBack) {
-      const route = `/${this.props.goBack}`;
+      const route = `${this.props.goBack}`;
       return (
         <div className="footer">
           <NavLink className="home-icon" to={route}>

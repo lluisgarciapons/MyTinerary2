@@ -133,9 +133,9 @@ export class Signup extends Component {
               />
               <label htmlFor="confirm-input">Confirm Password</label>
             </div>
-          </div>
-          <div className="form-group">
-            <button className="btn">Sign Up</button>
+            <div className="form-group">
+              <button className="btn">Sign Up</button>
+            </div>
           </div>
         </form>
         <Footer />

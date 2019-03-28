@@ -63,7 +63,7 @@ export function fetchUser() {
 export function postFavorite(id) {
   return dispatch => {
     axios
-      .post(
+      .put(
         "/user/favorites",
         {
           itinerary: id

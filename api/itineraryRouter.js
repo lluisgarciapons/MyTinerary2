@@ -9,13 +9,23 @@ itineraryRouter.route("/:id").get((req, res) => {
     .populate("city", "name")
     .exec((err, itineraries) => {
       if (err) {
-        res
-          .status(400)
-          .send({
-            status: 400,
-            message:
-              "This city does not exist, mate. How... how did you even get to this page?"
-          });
+        res.status(400).send({
+          status: 400,
+          message:
+            "This city does not exist, mate. How... how did you even get to this page?"
+        });
+        return;
+      }
+      res.json(itineraries);
+    });
+});
+
+itineraryRouter.route("/favorites/user").get((req, res) => {
+  Itinerary.find({ _id: { $in: req.user.favorites } })
+    .populate("city", "name")
+    .exec((err, itineraries) => {
+      if (err) {
+        res.status(400).send(err);
         return;
       }
       res.json(itineraries);

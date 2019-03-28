@@ -4,6 +4,7 @@ import Cities from "../components/cities/Cities.js";
 import Login from "../components/auth/Login.js";
 import Signup from "../components/auth/Signup.js";
 import Itineraries from "../components/itineraries/Itineraries";
+import Favorites from "../components/itineraries/Favorites.js";
 import { Route, Switch } from "react-router-dom";
 
 class Routing extends Component {
@@ -16,6 +17,7 @@ class Routing extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/cities/:id/itineraries" component={Itineraries} />
+        <Route path="/favorites" component={Favorites} />
       </Switch>
     );
   }

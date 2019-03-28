@@ -27,14 +27,16 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 
 //connect mongoose to the mLab database
-mongoose.connect(
-  keys.mongoDB.dbURI,
-  { useNewUrlParser: true }
-);
+mongoose.connect(keys.mongoDB.dbURI, { useNewUrlParser: true });
 
 //connect each url call to one API route
 app.use("/cities", cityRouter);
 app.use("/itineraries", itineraryRouter);
+app.use(
+  "/itineraries/find",
+  passport.authenticate("jwt", { session: false }),
+  itineraryRouter
+);
 app.use("/activities", activityRouter);
 app.use(
   "/comments",

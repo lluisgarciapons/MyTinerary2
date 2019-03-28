@@ -11,6 +11,10 @@
   height: 100vh;
 }
 
+.align-initial {
+  text-align: initial;
+}
+
 .header {
   padding: 10px 30px 10px 30px;
   display: flex;
@@ -102,6 +106,10 @@
 .icon {
   color: white;
   cursor: pointer;
+}
+
+.logout-account {
+  color: rgb(184, 184, 184);
 }
 
 .close {
@@ -208,6 +216,10 @@
 
 /*END LOADER*/
 
+.itinerary {
+  margin-bottom: 15px;
+}
+
 .info {
   display: flex;
   flex-direction: row;
@@ -238,7 +250,6 @@
 
 .itinerary-content {
   padding-top: 10px;
-  margin-top: 15px;
   margin-bottom: 0;
   border-top: 1px solid #ddd;
 }

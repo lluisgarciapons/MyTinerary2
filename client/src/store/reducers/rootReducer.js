@@ -4,6 +4,7 @@ import itinerariesReducer from "./itinerariesReducer";
 import activitiesReducer from "./activitiesReducer";
 import commentsReducer from "./commentsReducer";
 import userReducer from "./userReducer";
+import favoritesReducer from "./favoritesReducer";
 
 //combines all the individual reducers and their states
 export default combineReducers({
@@ -11,5 +12,6 @@ export default combineReducers({
   itineraries: itinerariesReducer,
   activities: activitiesReducer,
   comments: commentsReducer,
-  user: userReducer
+  user: userReducer,
+  favorites: favoritesReducer
 });

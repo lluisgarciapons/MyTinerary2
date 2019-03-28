@@ -40,19 +40,21 @@ class Header extends Component {
       <div className="header">
         {this.props.user.isLoggedIn ? (
           <>
-            <div className="profile-user-image-container">
-              <img
-                src={
-                  this.props.user.image ||
-                  "https://thesocietypages.org/socimages/files/2009/05/vimeo.jpg"
-                }
-                alt={this.props.user.name}
-                className="profile-picture"
-              />
-            </div>
+            <NavLink to="/favorites">
+              <div className="profile-user-image-container">
+                <img
+                  src={
+                    this.props.user.image ||
+                    "https://thesocietypages.org/socimages/files/2009/05/vimeo.jpg"
+                  }
+                  alt={this.props.user.name}
+                  className="profile-picture"
+                />
+              </div>
+            </NavLink>
           </>
         ) : (
-          <i style={iStyle} className="material-icons icon">
+          <i style={iStyle} className="material-icons icon logout-account">
             account_circle
           </i>
         )}
