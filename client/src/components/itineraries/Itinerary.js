@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import Comments from "./Comments";
-import Heart from "./Heart";
-import SlickSlider from "./SlickSlider";
+import React, { Component } from 'react';
+import Comments from './Comments';
+import Heart from './Heart';
+import SlickSlider from './SlickSlider';
 
 function HastagList(props) {
   return props.hastags.map(hastag => <Hastag key={hastag} hastag={hastag} />);
